@@ -1,5 +1,13 @@
-#wait for the SQL Server to come up
+#!/bin/sh
+
+echo "Waiting for SQL Server to start"
 sleep 20s
 
-#run the setup script to create the DB and the schema in the DB
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i tables_sqlServerMOT.sql
+until /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i tables_sqlServer.sql
+do
+   sleep 5
+   echo "Trying again..."
+done
+
+echo "Quartz.NET Database Script Completed"
+

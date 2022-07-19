@@ -1,6 +1,7 @@
 #!/bin/sh
 
 echo "Waiting for SQL Server to start"
+
 sleep 20s
 
 until /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i tables_sqlServer.sql
